@@ -1,6 +1,9 @@
 # limpiar y crear dist
 rm -rf dist
-mkdir -p dist/styles
+mkdir -p dist/{styles,art}
+
+# copiar art/
+cp public/art/* dist/art/
 
 # minificar HTML
 npx html-minifier-terser \

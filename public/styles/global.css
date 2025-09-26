@@ -1,0 +1,275 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Onest, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #212324;
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+svg {
+  fill: #444;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#screen-loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: #000;
+  display: grid;
+  align-content: center;
+  place-items: center;
+  gap: 24px;
+
+  &.inactive {
+    animation: fade-out 1s ease forwards;
+  }
+
+  .loader {
+    display: inline-flex;
+    gap: 10px;
+  }
+
+  .loader:before,
+  .loader:after {
+    content: "";
+    height: 36px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(#222 0 0) top/100% 40% no-repeat,
+      radial-gradient(farthest-side, #000 95%, #0000) 50%/8px 8px no-repeat #fff;
+    animation: l7 1.5s infinite alternate ease-in;
+  }
+  .text-loader {
+    --w: 10ch;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 12.8pt;
+    line-height: 2em;
+    letter-spacing: var(--w);
+    width: var(--w);
+    overflow: hidden;
+    white-space: nowrap;
+    color: #efefef;
+    text-shadow: calc(0 * var(--w)) 0 #efefef, calc(-1 * var(--w)) 0 #efefef,
+      calc(-2 * var(--w)) 0 #efefef, calc(-3 * var(--w)) 0 #efefef,
+      calc(-4 * var(--w)) 0 #efefef, calc(-5 * var(--w)) 0 #efefef,
+      calc(-6 * var(--w)) 0 #efefef, calc(-7 * var(--w)) 0 #efefef,
+      calc(-8 * var(--w)) 0 #efefef, calc(-9 * var(--w)) 0 #efefef;
+    animation: l31 1s infinite cubic-bezier(0.5, -150, 0.5, 150);
+  }
+
+  .text-loader:before {
+    content: "Loading...";
+  }
+}
+
+.container {
+  text-align: center;
+  display: grid;
+  gap: 16px;
+}
+
+.melting-text-container {
+  position: relative;
+  overflow: visible;
+}
+
+.melting-text {
+  font-size: 28pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  animation: melt 3s infinite ease-in-out;
+  background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.melting-text::before,
+.melting-text::after {
+  content: "Password Aura";
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff6f61, #ffbd44, #ff6f61);
+  -webkit-background-clip: text;
+  color: transparent;
+  z-index: -1;
+  transform: scaleY(1);
+  opacity: 0.5;
+  animation: drip 3s infinite ease-in-out;
+}
+
+.melting-text::after {
+  filter: blur(10px);
+  opacity: 0.3;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+#password-input {
+  width: 100%;
+  z-index: 2;
+  padding: 10px 40px 10px 15px;
+  font-size: 12pt;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  position: relative;
+  background: none;
+}
+
+.toggle-btn {
+  z-index: 3;
+  height: 100%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+
+    &#icon-eye {
+      opacity: 100%;
+    }
+    &#icon-eye-slash {
+      opacity: 0;
+    }
+  }
+
+  &.visible {
+    > #icon-eye {
+      opacity: 0;
+    }
+    > #icon-eye-slash {
+      opacity: 100%;
+    }
+  }
+}
+
+#aura {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: transparent;
+  border-radius: 100px;
+  transition: background 1s ease;
+}
+
+#strength-text {
+  z-index: 2;
+  text-align: right;
+  text-transform: uppercase;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#strength-slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 14px;
+  border-radius: 7px;
+  outline: none;
+  background: #efefef;
+  overflow: hidden;
+}
+
+#strength-slider::-webkit-slider-thumb {
+  display: none;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes l7 {
+  0%,
+  70% {
+    background-size: 100% 40%, 8px 8px;
+  }
+  85% {
+    background-size: 100% 120%, 8px 8px;
+  }
+  100% {
+    background-size: 100% 40%, 8px 8px;
+  }
+}
+
+@keyframes l31 {
+  15%,
+  100% {
+    text-shadow: calc(0 * var(--w) + 0.1px) 0 #efefef,
+      calc(-1 * var(--w)) 0.01em #efefef, calc(-2 * var(--w) - 0.2px) 0 #efefef,
+      calc(-3 * var(--w) + 0.1px) 0.01em #efefef,
+      calc(-4 * var(--w)) -0.01em #efefef, calc(-5 * var(--w) - 0.1px) 0 #efefef,
+      calc(-6 * var(--w) - 0.2px) 0.015em #efefef,
+      calc(-7 * var(--w) - 0.1px) 0.02em #efefef,
+      calc(-8 * var(--w)) -0.01em #efefef,
+      calc(-9 * var(--w) + 0.2px) -0.01em #efefef;
+  }
+}
+
+@keyframes melt {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes drip {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1.2);
+    opacity: 0.7;
+  }
+}

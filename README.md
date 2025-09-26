@@ -8,8 +8,6 @@
 
 ## Instalación
 
-**No se requiere servidor!** puedes abrir _**'public/index.html'**_ en tu navegador
-
 ```bash
 git clone https://github.com/bugged-code/password-aura.git
 cd password-aura
